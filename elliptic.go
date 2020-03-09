@@ -17,6 +17,12 @@ type ellipticPublicKey struct {
 	X, Y *big.Int
 }
 
+func NewEllipticPrivateKey(D []byte) *ellipticPrivateKey {
+	return &ellipticPrivateKey{
+		D: D,
+	}
+}
+
 type ellipticPrivateKey struct {
 	D []byte
 }
@@ -46,10 +52,10 @@ func (e *ellipticECDH) GenerateKey(rand io.Reader) (crypto.PrivateKey, crypto.Pu
 	}
 	pub = &ellipticPublicKey{
 		Curve: e.curve,
-		X: x,
-		Y: y,
+		X:     x,
+		Y:     y,
 	}
-	
+
 	return priv, pub, nil
 }
 
